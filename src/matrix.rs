@@ -25,4 +25,19 @@ impl Matrix {
             println!();
         }
     }
+    
+    pub fn matmul(&self, other: &Matrix) -> Matrix {
+        assert_eq!(self.cols, other.rows, "Matrix dimensions mismatch for matmul!");
+        let mut result = Matrix::new(self.rows, other.cols);
+        for row in 0..self.rows {
+            for col in 0..other.cols {
+                let mut sum = 0.0;
+                for k in 0..self.cols {
+                    sum += self.read(row, k) * other.read(k, col);
+                }
+                result.modify(row, col, sum);
+            }
+        }
+        result
+    }
 }
