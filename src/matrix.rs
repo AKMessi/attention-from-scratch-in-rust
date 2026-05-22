@@ -5,6 +5,22 @@ pub struct Matrix {
 }
 
 impl Matrix {
+    pub fn new(rows: usize, cols: usize) -> Self {
+        Self {
+            data: vec![0.0; rows * cols],
+            rows,
+            cols,
+        }
+    }
+
+    pub fn cols(&self) -> usize {
+        self.cols
+    }
+
+    pub fn rows(&self) -> usize {
+        self.rows
+    }
+
     #[inline]
     pub fn read(&self, row: usize, col: usize) -> f32 {
         self.data[row * self.cols + col]
@@ -25,7 +41,7 @@ impl Matrix {
             println!();
         }
     }
-    
+
     pub fn matmul(&self, other: &Matrix) -> Matrix {
         assert_eq!(self.cols, other.rows, "Matrix dimensions mismatch for matmul!");
         let mut result = Matrix::new(self.rows, other.cols);
@@ -72,12 +88,12 @@ impl Matrix {
             for col in 1..self.cols {
                 max = max.max(self.read(row, col))
             }
-            
+
             let mut sum = 0.0;
             for k in 0..self.cols {
                 sum += (self.read(row, k) - max).exp();
             }
-            
+
             for col in 0..self.cols {
                 result.modify(row, col, (self.read(row, col) - max).exp() / sum);
             }
