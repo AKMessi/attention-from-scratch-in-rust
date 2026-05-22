@@ -38,6 +38,7 @@ $$
 │   └── attention.rs  # Single-Head and Multi-Head Attention structural layers
 ├── Cargo.toml        # Zero-dependency package manifest
 └── README.md         # Documentation
+```
 
 ## 👤 Author
 
