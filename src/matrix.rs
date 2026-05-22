@@ -40,4 +40,14 @@ impl Matrix {
         }
         result
     }
+
+    pub fn transpose(&self) -> Matrix {
+        let mut result = Matrix::new(self.cols, self.rows);
+        for row in 0..self.rows {
+            for col in 0..self.cols {
+                result.modify(col, row, self.read(row, col));
+            }
+        }
+        result
+    }
 }
